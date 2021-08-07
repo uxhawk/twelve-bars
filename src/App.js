@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import React, { useRef, useState } from 'react';
+import PlayPauseButton from './PlayPauseButton';
+import { Card, Elevation, FormGroup, NumericInput } from '@blueprintjs/core';
 import './App.css';
+import TwelveBars  from './TwelveBars';
+import { BeatProvider } from './BeatContext';
 
 function App() {
+  const [beats, setBeats] = useState(450);
+  const beatsRef = useRef();
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BeatProvider>
+      <div style={{ display:'flex', justifyContent:'center', alignItems:'center', height:'100vh'}}>
+      <Card elevation={Elevation.THREE}
+      className="custom-width">
+        <TwelveBars />
+        <FormGroup
+            label='Beats Per Minute'
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <NumericInput
+                allowNumericCharactersOnly={true}
+                leftIcon="music"
+                defaultValue={beats}
+                inputRef={beatsRef}
+                onValueChange={setBeats}
+                min={0}
+            />
+        </FormGroup>
+        <PlayPauseButton bpm={beats}/>
+      </Card>
+      </div>
+    </BeatProvider>
+
+
   );
 }
 
