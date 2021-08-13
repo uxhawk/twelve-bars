@@ -13,10 +13,12 @@ export default function PlayPauseButton(props) {
         btnText: 'Play'
     });
 
+    const beatsFromMilli = 60000/props.bpm;
+
     var playerID = useRef(null);
     function handleClick() {
         if (playing.isPlaying === false) {
-            playerID.current = setInterval(loopBars, props.bpm);
+            playerID.current = setInterval(loopBars, beatsFromMilli);
             setPlaying({
                 isPlaying: true,
                 icon: 'pause',

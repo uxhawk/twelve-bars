@@ -6,7 +6,7 @@ import TwelveBars  from './TwelveBars';
 import { BeatProvider } from './BeatContext';
 
 function App() {
-  const [beats, setBeats] = useState(450);
+  const [beats, setBeats] = useState(60);
   const beatsRef = useRef();
 
 
